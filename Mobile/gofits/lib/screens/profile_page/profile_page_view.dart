@@ -14,10 +14,17 @@ class ProfilePageView extends ProfilePageViewModel {
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
+          SizedBox(height: height * 0.06),
           imageSection(width, dataImage),
-          SizedBox(height: 20),
+          SizedBox(height: height * 0.03),
           dataSectionProfile(width),
+          SizedBox(height: height * 0.03),
           serviceSectionProfile(width),
+          SizedBox(height: height * 0.03),
+          infoProfile(width),
+          SizedBox(height: height * 0.05),
+          textMotivation(width),
+          SizedBox(height: height * 0.05),
           logOutButton(width, height),
         ],
       ),
