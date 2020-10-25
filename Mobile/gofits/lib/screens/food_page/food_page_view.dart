@@ -32,63 +32,61 @@ class FoodPageView extends FoodPageViewModel {
                 ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.fromLTRB(
-                mainContainerX,
-                10,
-                mainContainerX,
-                mainContainerY,
-              ),
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  titleApp(width),
-                  SizedBox(height: 12),
-                  StaggeredGridView.countBuilder(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 20,
-                    mainAxisSpacing: 16,
-                    shrinkWrap: true,
-                    physics: NeverScrollableScrollPhysics(),
-                    itemCount: listFood.length,
-                    staggeredTileBuilder: (i) {
-                      var main = 0;
-                      var cross = 0;
-                      if (i % 1 == 0) {
-                        main = 1;
-                        cross = 1;
-                      }
-                      if (i % 2 == 0) {
-                        main = 1;
-                        cross = 1;
-                      }
-                      if (i % 3 == 0) {
-                        main = 1;
-                        cross = 1;
-                      }
-                      if (i % 4 == 0) {
-                        main = 1;
-                        cross = 1;
-                      }
-                      if (i % 5 == 0) {
-                        main = 1;
-                        cross = 2;
-                      }
-
-                      return StaggeredTile.count(cross, main);
-                    },
-                    itemBuilder: (context, i) {
-                      return itemFood(
-                        width,
-                        height,
-                        listFood[i]['idFood'],
-                        listFood[i]['image'],
-                        listFood[i]['name'],
-                      );
-                    },
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 12),
+                titleApp(width),
+                StaggeredGridView.countBuilder(
+                  padding: EdgeInsets.fromLTRB(
+                    mainContainerX,
+                    10,
+                    mainContainerX,
+                    mainContainerY,
                   ),
-                ],
-              ),
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 20,
+                  mainAxisSpacing: 16,
+                  shrinkWrap: true,
+                  physics: NeverScrollableScrollPhysics(),
+                  itemCount: listFood.length,
+                  staggeredTileBuilder: (i) {
+                    var main = 0;
+                    var cross = 0;
+                    if (i % 1 == 0) {
+                      main = 1;
+                      cross = 1;
+                    }
+                    if (i % 2 == 0) {
+                      main = 1;
+                      cross = 1;
+                    }
+                    if (i % 3 == 0) {
+                      main = 1;
+                      cross = 1;
+                    }
+                    if (i % 4 == 0) {
+                      main = 1;
+                      cross = 1;
+                    }
+                    if (i % 5 == 0) {
+                      main = 1;
+                      cross = 2;
+                    }
+
+                    return StaggeredTile.count(cross, main);
+                  },
+                  itemBuilder: (context, i) {
+                    return itemFood(
+                      width,
+                      height,
+                      listFood[i]['idFood'],
+                      listFood[i]['image'],
+                      listFood[i]['name'],
+                    );
+                  },
+                ),
+              ],
             ),
           ],
         ),
@@ -101,59 +99,74 @@ class FoodPageView extends FoodPageViewModel {
     return Container(
       width: width,
       decoration: BoxDecoration(
-          color: cardColor,
-          borderRadius: BorderRadius.circular(5),
-          boxShadow: [
-            BoxShadow(
-                color: Colors.black.withOpacity(0.3),
-                spreadRadius: 1,
-                offset: Offset(2, 3))
-          ]),
-      child: MaterialButton(
-        padding: EdgeInsets.zero,
-        onPressed: () {
-          nextPage(
-              context,
-              DetailFoodPage(
-                idFood: id,
-                image: image,
-              ));
-        },
-        child: Stack(
-          children: [
-            Image.asset(
-              image,
-              width: width,
-              fit: BoxFit.cover,
-            ),
-            SizedBox(height: 5),
-            Positioned(
-              bottom: 0,
-              left: 0,
-              right: 0,
-              child: Container(
-                height: height * 0.03,
-                color: cardColor.withOpacity(0.7),
-              ),
-            ),
-            Positioned(
-              bottom: 0,
-              left: 10,
-              right: 10,
-              child: Container(
-                height: height * 0.027,
-                child: Text(
-                  name,
-                  style: TextStyle(
-                    fontSize: height * 0.019,
-                    color: Colors.white,
-                    fontWeight: FontWeight.bold,
-                  ),
-                  textAlign: TextAlign.center,
+        color: cardColor,
+        boxShadow: [
+          BoxShadow(
+              color: Colors.black.withOpacity(0.3),
+              spreadRadius: 1,
+              blurRadius: 2,
+              offset: Offset(2, 3))
+        ],
+        borderRadius: BorderRadius.circular(8),
+      ),
+      child: ClipRRect(
+        borderRadius: BorderRadius.circular(8),
+        child: MaterialButton(
+          padding: EdgeInsets.zero,
+          onPressed: () {
+            nextPage(
+                context,
+                DetailFoodPage(
+                  idFood: id,
+                  image: image,
+                ));
+          },
+          child: Stack(
+            children: [
+              ClipRRect(
+                borderRadius: BorderRadius.circular(8),
+                child: Image.asset(
+                  image,
+                  width: width,
+                  fit: BoxFit.cover,
                 ),
               ),
-            ),
-          ],
+              SizedBox(height: 5),
+              Positioned(
+                bottom: 0,
+                left: 0,
+                right: 0,
+                child: Container(
+                  height: height * 0.03,
+                  decoration: BoxDecoration(
+                    color: cardColor.withOpacity(0.7),
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(8),
+                      bottomRight: Radius.circular(8),
+                    ),
+                  ),
+                ),
+              ),
+              Positioned(
+                bottom: 0,
+                left: 10,
+                right: 10,
+                child: Container(
+                  height: height * 0.027,
+                  alignment: Alignment.center,
+                  child: Text(
+                    name,
+                    style: TextStyle(
+                      fontSize: height * 0.015,
+                      color: Colors.white,
+                      fontWeight: FontWeight.bold,
+                    ),
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

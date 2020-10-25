@@ -49,4 +49,5 @@ const String clock = "assets/icons/jam.png";
 const String cal = "assets/icons/cal.png";
 const String board = "assets/icons/board.png";
 const String time = "assets/icons/time.png";
+const String logo = "assets/icons/logo.png";
 // navbar Icon //

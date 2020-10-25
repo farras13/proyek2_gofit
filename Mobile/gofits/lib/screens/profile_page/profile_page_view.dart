@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gofits/helpers/global_variable.dart';
+import 'package:gofits/screens/profile_page/widgets/profile_widget.dart';
 import './profile_page_view_model.dart';
 
 class ProfilePageView extends ProfilePageViewModel {
@@ -10,28 +11,40 @@ class ProfilePageView extends ProfilePageViewModel {
     // Replace this with your build function
     return Scaffold(
       backgroundColor: bgColor,
-      floatingActionButton: logOutButton(width, height),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
+      body: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: [
+          imageSection(width, dataImage),
+          SizedBox(height: 20),
+          dataSectionProfile(width),
+          serviceSectionProfile(width),
+          logOutButton(width, height),
+        ],
+      ),
     );
   }
 
   Widget logOutButton(double width, double height) {
     return Container(
       width: width,
-      height: height * 0.065,
-      margin: EdgeInsets.symmetric(horizontal: 10, vertical: height * 0.02),
+      height: height * 0.06,
+      margin: EdgeInsets.symmetric(
+        horizontal: width * 0.1,
+        vertical: height * 0.02,
+      ),
       decoration: BoxDecoration(
         color: mainColor,
-        borderRadius: BorderRadius.circular(3),
+        borderRadius: BorderRadius.circular(50),
       ),
       child: MaterialButton(
         child: Text(
           "SIGN OUT",
           style: TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.bold,
-              color: Colors.white,
-              letterSpacing: 0.5),
+            fontSize: 14,
+            fontWeight: FontWeight.bold,
+            color: Colors.white,
+            letterSpacing: 0.5,
+          ),
         ),
         onPressed: () => signOut(),
       ),

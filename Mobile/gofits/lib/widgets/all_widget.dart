@@ -9,13 +9,23 @@ Widget titleApp(double width) {
       mainContainerX,
       0,
     ),
-    child: Text(
-      "Go Fit",
-      style: TextStyle(
-        fontSize: width * 0.07,
-        fontFamily: "RG",
-        color: Colors.white,
-      ),
+    child: Row(
+      children: [
+        Image.asset(
+          "assets/icons/logo.png",
+          width: width * 0.115,
+          height: width * 0.115,
+        ),
+        SizedBox(width: 4),
+        Text(
+          "Go Fit",
+          style: TextStyle(
+            fontSize: width * 0.06,
+            fontFamily: "RG",
+            color: Colors.white,
+          ),
+        ),
+      ],
     ),
   );
 }

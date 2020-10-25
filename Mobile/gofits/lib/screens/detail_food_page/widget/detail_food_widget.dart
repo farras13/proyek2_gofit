@@ -68,7 +68,7 @@ Widget imageHeaderDetailFood(
                             "${data['name']}",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: height * 0.03,
+                              fontSize: height * 0.026,
                               fontFamily: "ROB",
                               fontWeight: FontWeight.bold,
                             ),
@@ -78,7 +78,7 @@ Widget imageHeaderDetailFood(
                             "${data['desc']}",
                             style: TextStyle(
                               color: Colors.white,
-                              fontSize: height * 0.025,
+                              fontSize: height * 0.02,
                               fontFamily: "ROB",
                             ),
                           ),

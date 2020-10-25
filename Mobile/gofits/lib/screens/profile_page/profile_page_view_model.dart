@@ -6,6 +6,7 @@ import './profile_page.dart';
 
 abstract class ProfilePageViewModel extends State<ProfilePage> {
   // Add your state and logic here
+  String dataImage = "assets/images/pakndul.jpg";
   signOut() async {
     SharedPreferences sp = await SharedPreferences.getInstance();
     sp.clear();
