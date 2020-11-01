@@ -125,7 +125,7 @@ Widget infoBox(double width, String title, String value) {
           style: TextStyle(
             fontSize: width * 0.03,
             color: Colors.white,
-            fontFamily: "ROB",
+            fontFamily: "ROBB",
           ),
         ),
         SizedBox(height: 8),
