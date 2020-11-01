@@ -14,23 +14,19 @@ class RegisterPageView extends RegisterPageViewModel {
       body: Container(
         width: width,
         height: height,
+        decoration: BoxDecoration(
+            image: DecorationImage(
+                image: AssetImage("assets/images/mbak.png"),
+                fit: BoxFit.cover)),
         child: SingleChildScrollView(
-          child: Container(
-            width: width,
-            height: height,
-            decoration: BoxDecoration(
-                image: DecorationImage(
-                    image: AssetImage("assets/images/mbak.png"),
-                    fit: BoxFit.cover)),
-            child: Column(
-              children: [
-                SizedBox(height: 40),
-                headerRegisterPage(width, height),
-                SizedBox(height: 12),
-                formRegister(width),
-                SizedBox(height: 12),
-              ],
-            ),
+          child: Column(
+            children: [
+              SizedBox(height: 10),
+              headerRegisterPage(width, height),
+              SizedBox(height: 8),
+              formRegister(width),
+              SizedBox(height: 8),
+            ],
           ),
         ),
       ),

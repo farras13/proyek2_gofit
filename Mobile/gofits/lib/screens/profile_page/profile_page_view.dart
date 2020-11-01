@@ -19,12 +19,12 @@ class ProfilePageView extends ProfilePageViewModel {
           SizedBox(height: height * 0.03),
           dataSectionProfile(width),
           SizedBox(height: height * 0.03),
-          serviceSectionProfile(width),
+          serviceSectionProfile(context, width),
           SizedBox(height: height * 0.03),
           infoProfile(width),
-          SizedBox(height: height * 0.05),
+          SizedBox(height: height * 0.04),
           textMotivation(width),
-          SizedBox(height: height * 0.05),
+          SizedBox(height: height * 0.04),
           logOutButton(width, height),
         ],
       ),
@@ -34,7 +34,7 @@ class ProfilePageView extends ProfilePageViewModel {
   Widget logOutButton(double width, double height) {
     return Container(
       width: width,
-      height: height * 0.06,
+      height: height * 0.045,
       margin: EdgeInsets.symmetric(
         horizontal: width * 0.1,
         vertical: height * 0.02,
@@ -47,7 +47,7 @@ class ProfilePageView extends ProfilePageViewModel {
         child: Text(
           "SIGN OUT",
           style: TextStyle(
-            fontSize: 14,
+            fontSize: height * 0.02,
             fontWeight: FontWeight.bold,
             color: Colors.white,
             letterSpacing: 0.5,
