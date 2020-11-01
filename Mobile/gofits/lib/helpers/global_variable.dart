@@ -7,6 +7,7 @@ const Color bgColor = Color(0xff252E37);
 const Color cardColor = Color(0xff323C45);
 const Color headerColor = Color(0xff2E3841);
 const Color bgImage = Color(0xff2F3337);
+const Color boxInformation = Color(0xff15232C);
 
 const TextStyle titleText = TextStyle(
   fontSize: 36,

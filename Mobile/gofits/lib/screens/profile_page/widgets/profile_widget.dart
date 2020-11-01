@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:gofits/helpers/global_variable.dart';
+import 'package:gofits/screens/body_calories_page/body_calories_page.dart';
+import 'package:gofits/screens/edit_profile_page/edit_profile_page.dart';
+import 'package:gofits/screens/food_calories_page/food_calories_page.dart';
+import 'package:gofits/widgets/route_animation.dart';
 
 Widget imageSection(double width, String dataImage) {
   return Stack(
@@ -68,34 +72,44 @@ Widget dataSectionProfile(double width) {
   );
 }
 
-Widget serviceSectionProfile(double width) {
+Widget serviceSectionProfile(BuildContext context, double width) {
   return Container(
     width: width,
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        btnServiceProfile("Body Calories"),
-        btnServiceProfile("Edit Profile"),
-        btnServiceProfile("Food Calories"),
+        btnServiceProfile(context, "Body Calories", page: BodyCaloriesPage()),
+        btnServiceProfile(context, "Edit Profile", page: EditProfilePage()),
+        btnServiceProfile(context, "Food Calories", page: FoodCaloriesPage()),
       ],
     ),
   );
 }
 
-Widget btnServiceProfile(String title) {
+Widget btnServiceProfile(BuildContext context, String title, {page}) {
+  double width = MediaQuery.of(context).size.width;
+  double height = MediaQuery.of(context).size.height;
   return Container(
+    width: width * 0.28,
+    height: height * 0.045,
+    padding: EdgeInsets.zero,
     decoration: BoxDecoration(
       color: bgColor,
       border: Border.all(color: mainColor, width: 2),
       borderRadius: BorderRadius.circular(12),
     ),
-    child: MaterialButton(
-      onPressed: () {},
-      child: Text(
-        title,
-        style: TextStyle(
-          color: Colors.white,
-          fontSize: 12,
+    child: ClipRRect(
+      borderRadius: BorderRadius.circular(10),
+      child: MaterialButton(
+        onPressed: () {
+          nextPage(context, page);
+        },
+        child: Text(
+          title,
+          style: TextStyle(
+            color: Colors.white,
+            fontSize: 12,
+          ),
         ),
       ),
     ),
