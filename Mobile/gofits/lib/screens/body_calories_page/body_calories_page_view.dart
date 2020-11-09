@@ -40,37 +40,42 @@ class BodyCaloriesPageView extends BodyCaloriesPageViewModel {
             SizedBox(height: height * 0.06),
             boxInputBodyCalorie(width, height),
             SizedBox(height: height * 0.03),
-            resultBodyCalorie(width, height),
+            total == null ? SizedBox() : resultBMR(width, height),
+            SizedBox(height: height * 0.02),
+            total == null ? SizedBox() : resultBodyCalorie(width, height),
           ],
         ),
       ),
     );
   }
 
-  Widget resultBodyCalorie(double width, double height) {
+  Widget resultBMR(double width, double height) {
     return Column(
       children: [
-        Text(
-          "The calories you need in one day are",
-          style: TextStyle(
-            fontSize: width * 0.04,
-            color: Colors.white,
-            fontFamily: "ROB",
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.1),
+          child: Text(
+            "your BMR are :",
+            style: TextStyle(
+              fontSize: width * 0.03,
+              color: Colors.white,
+              fontFamily: "ROB",
+            ),
+            textAlign: TextAlign.center,
           ),
         ),
         SizedBox(height: height * 0.02),
-        Container(
-          width: width * 0.4,
-          padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
-          decoration: BoxDecoration(
-            color: cardColor,
-            borderRadius: BorderRadius.circular(6),
-          ),
-          child: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              Text(
-                "9999 calories",
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: cardColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                "$subtotal kkal",
                 style: TextStyle(
                   fontSize: width * 0.04,
                   fontFamily: "ROB",
@@ -78,14 +83,61 @@ class BodyCaloriesPageView extends BodyCaloriesPageViewModel {
                 ),
                 textAlign: TextAlign.center,
               ),
-              SizedBox(width: 6),
-              Icon(
-                FontAwesome.check_square_o,
-                color: Colors.white,
-                size: width * 0.045,
-              ),
-            ],
+            ),
+            SizedBox(width: 10),
+            Icon(
+              FontAwesome.check_square_o,
+              color: Colors.white,
+              size: 21,
+            )
+          ],
+        )
+      ],
+    );
+  }
+
+  Widget resultBodyCalorie(double width, double height) {
+    return Column(
+      children: [
+        Padding(
+          padding: EdgeInsets.symmetric(horizontal: width * 0.1),
+          child: Text(
+            "This is the MINIMUM number of calories per day to make your body fit : ",
+            style: TextStyle(
+              fontSize: width * 0.03,
+              color: Colors.white,
+              fontFamily: "ROB",
+            ),
+            textAlign: TextAlign.center,
           ),
+        ),
+        SizedBox(height: height * 0.02),
+        Row(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            Container(
+              padding: EdgeInsets.symmetric(horizontal: 12, vertical: 6),
+              decoration: BoxDecoration(
+                color: cardColor,
+                borderRadius: BorderRadius.circular(6),
+              ),
+              child: Text(
+                "$total kkal",
+                style: TextStyle(
+                  fontSize: width * 0.04,
+                  fontFamily: "ROB",
+                  color: Colors.white,
+                ),
+                textAlign: TextAlign.center,
+              ),
+            ),
+            SizedBox(width: 10),
+            Icon(
+              FontAwesome.check_square_o,
+              color: Colors.white,
+              size: 21,
+            )
+          ],
         )
       ],
     );
@@ -106,22 +158,30 @@ class BodyCaloriesPageView extends BodyCaloriesPageViewModel {
                   width,
                   heightInput,
                   hint: "Input your height",
+                  textData: "cm",
                 ),
                 customInputBodyCalories(
                   width,
                   weight,
                   hint: "Input your weight",
+                  textData: "kg",
                 ),
                 customInputBodyCalories(
                   width,
                   age,
                   hint: "Input your age",
+                  textData: "years old",
                 ),
                 SizedBox(height: 5),
                 CustomDropdownActivity(
-                  dataList: [],
+                  dataList: activityList,
                   title: "Your Activity",
-                  onChange: (value) {},
+                  onChange: (value) {
+                    setState(() {
+                      selectedActivity = activityList[value];
+                      print(selectedActivity);
+                    });
+                  },
                 ),
                 SizedBox(height: 30),
                 countBodyCalorieBtn(width)
@@ -139,30 +199,76 @@ class BodyCaloriesPageView extends BodyCaloriesPageViewModel {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          Container(
-            width: width * 0.35,
-            height: width * 0.35,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  "https://images.pexels.com/photos/1898555/pexels-photo-1898555.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+          InkWell(
+            onTap: () {
+              setState(() {
+                selected = 0;
+                selectedGender = genderList[1];
+              });
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: width * 0.365,
+                  height: width * 0.365,
+                  decoration: BoxDecoration(
+                    color: (selected != null && selected == 0)
+                        ? Colors.white
+                        : bgColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
-              ),
+                Container(
+                  width: width * 0.35,
+                  height: width * 0.35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        "https://images.pexels.com/photos/1898555/pexels-photo-1898555.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260",
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
-          Container(
-            width: width * 0.35,
-            height: width * 0.35,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(5),
-              image: DecorationImage(
-                fit: BoxFit.cover,
-                image: NetworkImage(
-                  "https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+          InkWell(
+            onTap: () {
+              setState(() {
+                selected = 1;
+                selectedGender = genderList[0];
+              });
+            },
+            child: Stack(
+              alignment: Alignment.center,
+              children: [
+                Container(
+                  width: width * 0.365,
+                  height: width * 0.365,
+                  decoration: BoxDecoration(
+                    color: (selected != null && selected == 1)
+                        ? Colors.white
+                        : bgColor,
+                    borderRadius: BorderRadius.circular(5),
+                  ),
                 ),
-              ),
+                Container(
+                  width: width * 0.35,
+                  height: width * 0.35,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(5),
+                    image: DecorationImage(
+                      fit: BoxFit.cover,
+                      image: NetworkImage(
+                        "https://images.pexels.com/photos/428364/pexels-photo-428364.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=750&w=1260",
+                      ),
+                    ),
+                  ),
+                ),
+              ],
             ),
           ),
         ],
@@ -174,8 +280,9 @@ class BodyCaloriesPageView extends BodyCaloriesPageViewModel {
     double width,
     TextEditingController controller, {
     String hint,
+    String textData = "",
     bool isPassword = false,
-    keyboardType: TextInputType.text,
+    keyboardType: TextInputType.number,
     bool isDisabled = false,
   }) {
     return Container(
@@ -189,19 +296,31 @@ class BodyCaloriesPageView extends BodyCaloriesPageViewModel {
           borderRadius: BorderRadius.circular(8),
         ),
         child: TextField(
-          cursorColor: Colors.white,
+          cursorColor: mainColor,
           keyboardType: keyboardType,
           controller: controller,
           style: TextStyle(
             fontFamily: "ROB",
             fontWeight: FontWeight.bold,
-            fontSize: 14,
+            fontSize: 12,
             color: Colors.white,
           ),
           decoration: InputDecoration(
             border: InputBorder.none,
-            contentPadding: EdgeInsets.fromLTRB(12, 0, 12, 14),
+            contentPadding: EdgeInsets.fromLTRB(12, 4, 12, 14),
             hintText: hint,
+            suffixIcon: Padding(
+              padding: const EdgeInsets.fromLTRB(8.0, 10.0, 8.0, 8.0),
+              child: Text(
+                textData,
+                style: TextStyle(
+                  fontWeight: FontWeight.bold,
+                  fontSize: 12,
+                  fontFamily: "ROB",
+                  color: Colors.white,
+                ),
+              ),
+            ),
             hintStyle: TextStyle(
               fontWeight: FontWeight.bold,
               fontSize: 12,
@@ -235,7 +354,9 @@ class BodyCaloriesPageView extends BodyCaloriesPageViewModel {
                 letterSpacing: 1,
               ),
             ),
-            onPressed: () {},
+            onPressed: () {
+              onPressedCount();
+            },
           ),
         ),
       ),

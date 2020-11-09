@@ -216,7 +216,7 @@ class MusclePageView extends MusclePageViewModel {
                         child: Text(
                           data['name'],
                           style: TextStyle(
-                            fontSize: height * 0.015,
+                            fontSize: height * 0.013,
                             color: Colors.white,
                             fontWeight: FontWeight.bold,
                           ),

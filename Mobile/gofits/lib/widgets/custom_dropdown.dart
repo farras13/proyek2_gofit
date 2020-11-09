@@ -4,7 +4,7 @@ import 'package:gofits/helpers/global_variable.dart';
 class CustomDropdownActivity extends StatefulWidget {
   final String title;
   final List dataList;
-  final Function(String) onChange;
+  final Function(int) onChange;
 
   const CustomDropdownActivity(
       {Key key, this.title, this.dataList, this.onChange})
@@ -29,6 +29,7 @@ class _CustomDropdownActivityState extends State<CustomDropdownActivity> {
       child: DropdownButton(
         iconDisabledColor: mainColor,
         iconEnabledColor: mainColor,
+        dropdownColor: bgColor,
         isExpanded: true,
         hint: Text(
           _selectedName != null ? _selectedName : widget.title,
@@ -40,17 +41,17 @@ class _CustomDropdownActivityState extends State<CustomDropdownActivity> {
         ),
         items: widget.dataList.map((data) {
           return DropdownMenuItem(
-            value: data['name'],
+            value: data['index'],
             onTap: () {
               setState(() {
-                _selectedName = data['placeholder'];
+                _selectedName = data['name'];
                 isSelected = true;
               });
             },
             child: Container(
               child: Text(
-                data['placeholder'],
-                style: TextStyle(color: mainColor),
+                data['name'],
+                style: TextStyle(color: Colors.white),
               ),
             ),
           );
