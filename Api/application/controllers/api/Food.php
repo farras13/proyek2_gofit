@@ -16,7 +16,7 @@ class Food extends REST_Controller {
         $this->load->model('foodModel');
     }
     
-    public function index()
+    public function index_get()
     {
         $food = json_decode($this->curl->simple_get($this->API));
         if ($food) {
@@ -32,13 +32,22 @@ class Food extends REST_Controller {
         }
     }
 
-    public function food_post()
+    
+
+    public function index_post()
     {
-        \Cloudinary\Uploader::upload($this->input->post('path'));
+        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('image'));
         $data = array(
             'name' => $this->input->post('food'), 
         );
-        if ($this->food->postFood($data) > 0) {
+        $this->Image_post($files['image'], $data, 'listsubmuscle');
+        
+    }
+
+    public function Image_post($img, $data)
+    {
+        $data['image'] = $img['url'];  
+        if ($this->ls->postFood($data) > 0) {
             $this->response([
                 'status' => "true", 
                 'data' => $data
@@ -46,7 +55,7 @@ class Food extends REST_Controller {
         } else {
             $this->response([
                 'status' => "false", 
-                'massage' => 'id not found'
+                'massage' => 'data not found'
             ], 404);
         }
     }

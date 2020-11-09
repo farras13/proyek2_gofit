@@ -6,8 +6,7 @@ use Restserver\Libraries\REST_Controller;
     require(APPPATH . 'libraries/REST_Controller.php');
 
     class Workout extends REST_Controller {
-        var $API ="https://api.edamam.com/api/food-database/v2/parser?ingr=*&app_id=e5c0b3ca&app_key=ee28dc1c5fc9d3c94942d8ae4786b596";
-
+       
 function __construct() {
     parent::__construct();
         $this->load->model('Workmodel', 'ls');
@@ -118,7 +117,7 @@ function __construct() {
 
     public function muscleDetail_post()
     {
-        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('path'));
+        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('image'));
         $data = array(
             'idMuscle' => $this->input->post('id'),
             'muscle' => $this->input->post('name'),
@@ -132,8 +131,7 @@ function __construct() {
 
     public function Image_post($img, $data , $tabel)
     {
-        $a = array('image' => $img['url']);
-        $data = array_push($a,$data); 
+        $data['image'] = $img['url'];  
         if ($this->ls->dataPost($tabel,$data) > 0) {
             $this->response([
                 'status' => "true", 
@@ -149,7 +147,7 @@ function __construct() {
 
     public function workout_post()
     {
-        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('path'));
+        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('image'));
         $data = array(
             'name' => $this->input->post('workout'), 
             'type' => $this->input->post('type'), 
@@ -162,7 +160,7 @@ function __construct() {
 
     public function subworkout_post()
     {
-        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('path'));
+        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('image'));
         $data = array(
             'idWorkout' => $this->input->post('idWorkout'), 
             'name' => $this->input->post('workout'), 
