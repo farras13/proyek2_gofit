@@ -11,6 +11,7 @@ class Food extends REST_Controller {
         parent::__construct();
         //Do your magic here
         $this->API = "https://api.edamam.com/api/food-database/v2/parser?ingr=*&app_id=e5c0b3ca&app_key=ee28dc1c5fc9d3c94942d8ae4786b596";
+        $this->haha = "https://api.edamam.com/api/food-database/v2/nutrients?app_id=e5c0b3ca&app_key=ee28dc1c5fc9d3c94942d8ae4786b596";
         $this->load->library('curl');
         $this->load->library('Cloudinarylib');
         $this->load->model('foodModel');
@@ -31,8 +32,6 @@ class Food extends REST_Controller {
             ], 404);
         }
     }
-
-    
 
     public function index_post()
     {

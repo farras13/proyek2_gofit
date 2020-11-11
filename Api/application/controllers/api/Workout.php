@@ -60,11 +60,12 @@ function __construct() {
     {
         $id = $this->get('idMuscle');
         $detail = $this->ls->getMuscleDetail($id);    
-
+        $d['list'] = $detail;
+        $d['video'] = $this->ls->getVideo($id);
         if ($detail) {
             $this->response([
                 'status' => "true", 
-                'data' => $detail
+                'data' => $d
             ], 200);
         } else {
             $this->response([

@@ -29,12 +29,20 @@ class Workmodel extends CI_Model {
        
     }
 
-    public function getMuscleDetail($id=null)
+    public function getMuscleDetail($id)
     {
        
-        $this->db->join('muscle', 'listsubmuscle.idMuscle = muscle.idMuscle', 'left');
-        return $this->db->get_where('listsubmuscle', ['idDetailMuscle' => $id])->result_array();
+        // $this->db->join('muscle', 'listsubmuscle.idMuscle = muscle.idMuscle', 'left');
+        $this->db->select('idDetailMuscle, idMuscle, name, image, set, duration, rest');
+        return $this->db->get_where('listsubmuscle', ['idMuscle' => $id])->result_array();
        
+    }
+
+    public function getVideo($id)
+    {
+        $this->db->select('link, start, end');
+        $this->db->where('idMuscle', $id);
+        return $this->db->get('listsubmuscle')->result_array();        
     }
 
     public function dataPost($t,$object)
