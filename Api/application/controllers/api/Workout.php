@@ -19,8 +19,7 @@ function __construct() {
     public function detail_get()
     {
         $id = $this->get('idWorkout');
-        $detail = $this->ls->getWorkDetail($id);    
-
+        $detail = $this->ls->getWorkDetail($id);      
         if ($detail) {
             $this->response([
                 'status' => "true", 
@@ -28,9 +27,10 @@ function __construct() {
             ], 200);
         } else {
             $this->response([
-                'status' => "false", 
-                'massage' => 'id not found'
-            ], 404);
+                'status' => "true", 
+                'data' => []
+            ], 200);
+            
         }
     }
 
@@ -60,18 +60,16 @@ function __construct() {
     {
         $id = $this->get('idMuscle');
         $detail = $this->ls->getMuscleDetail($id);    
-        $d['list'] = $detail;
-        $d['video'] = $this->ls->getVideo($id);
         if ($detail) {
             $this->response([
                 'status' => "true", 
-                'data' => $d
+                'data' => $detail
             ], 200);
         } else {
             $this->response([
-                'status' => "false", 
-                'massage' => 'id not found'
-            ], 404);
+                'status' => "true", 
+                'data' => []
+            ], 200);
         }
     }
     public function muscle_get()

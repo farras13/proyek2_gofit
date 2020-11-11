@@ -21,28 +21,27 @@ class Workmodel extends CI_Model {
         }
     }
 
-    public function getWorkDetail($id=null)
+    public function getWorkDetail($id = null)
     {
-       
+        // $this->db->select('idWorkoutDetail, listsubworkout.idWorkout, listsubworkout.name, listsubworkout.image, listsubworkout.set, listsubworkout.duration, listsubworkout.rest');
         $this->db->join('listworkout', 'listsubworkout.idWorkout = listworkout.idWorkout', 'left');
-        return $this->db->get_where('listsubworkout', ['idWorkoutDetail' => $id])->result_array();
+        return $this->db->get_where('listsubworkout', ['listworkout.idWorkout' => $id])->result_array();
        
     }
 
     public function getMuscleDetail($id)
     {
-       
-        // $this->db->join('muscle', 'listsubmuscle.idMuscle = muscle.idMuscle', 'left');
-        $this->db->select('idDetailMuscle, idMuscle, name, image, set, duration, rest');
-        return $this->db->get_where('listsubmuscle', ['idMuscle' => $id])->result_array();
+        $this->db->join('muscle', 'listsubmuscle.idMuscle = muscle.idMuscle', 'left');
+        // $this->db->select('idDetailMuscle, idMuscle, name, image, set, duration, rest');
+        return $this->db->get_where('listsubmuscle', ['listsubmuscle.idMuscle' => $id])->result_array();
        
     }
 
-    public function getVideo($id)
+    public function getVideo($id, $val, $t)
     {
         $this->db->select('link, start, end');
-        $this->db->where('idMuscle', $id);
-        return $this->db->get('listsubmuscle')->result_array();        
+        $this->db->where($val, $id);
+        return $this->db->get($t)->result_array();        
     }
 
     public function dataPost($t,$object)
