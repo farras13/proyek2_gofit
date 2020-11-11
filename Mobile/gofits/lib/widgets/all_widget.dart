@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:gofits/helpers/global_variable.dart';
 
 Widget titleApp(double width) {
@@ -28,4 +29,16 @@ Widget titleApp(double width) {
       ],
     ),
   );
+}
+
+toastMessage(String message,
+    {Color bg = secondaryColor, Color textColor = Colors.white}) {
+  return Fluttertoast.showToast(
+      msg: message,
+      toastLength: Toast.LENGTH_SHORT,
+      gravity: ToastGravity.BOTTOM,
+      timeInSecForIosWeb: 2,
+      backgroundColor: bg,
+      textColor: textColor,
+      fontSize: 13.0);
 }
