@@ -88,7 +88,7 @@ class Food extends REST_Controller {
             'idFood' => $this->input->post('id'), 
             'ingridients' => $this->input->post('ingri')
         );
-        if ($this->ls->postFood('ingridients',$data) > 0) {
+        if ($this->f->postFood('ingridients',$data) > 0) {
             $this->response([
                 'status' => "true", 
                 'data' => $data
@@ -108,7 +108,7 @@ class Food extends REST_Controller {
             'idFood' => $this->input->post('id'), 
             'methods' => $this->input->post('method')
         );
-        if ($this->ls->postFood('methods',$data) > 0) {
+        if ($this->f->postFood('methods',$data) > 0) {
             $this->response([
                 'status' => "true", 
                 'data' => $data
@@ -125,7 +125,7 @@ class Food extends REST_Controller {
     public function Image_post($img, $data, $t)
     {
         $data['image'] = $img['url'];  
-        if ($this->ls->postFood($t,$data) > 0) {
+        if ($this->f->postFood($t,$data) > 0) {
             $this->response([
                 'status' => "true", 
                 'data' => $data
