@@ -96,22 +96,14 @@ function __construct() {
 
     public function muscle_post()
     {
+        $files['image'] = \Cloudinary\Uploader::upload($this->input->post('image'));
         $data = array(
             'muscle' => $this->input->post('muscle'),
             'duration' => $this->input->post('durasi'),
             'tool' => $this->input->post('tool'), 
+            'video' => $this->input->post('video'), 
         );
-        if ($this->ls->dataPost('muscle',$data) > 0) {
-            $this->response([
-                'status' => "true", 
-                'data' => $data
-            ], 200);
-        } else {
-            $this->response([
-                'status' => "false", 
-                'massage' => 'id not found'
-            ], 404);
-        }
+        $this->Image_post($files['image'], $data, 'muscle');
     }
 
     public function muscleDetail_post()
@@ -119,10 +111,13 @@ function __construct() {
         $files['image'] = \Cloudinary\Uploader::upload($this->input->post('image'));
         $data = array(
             'idMuscle' => $this->input->post('id'),
-            'muscle' => $this->input->post('name'),
+            'name' => $this->input->post('name'),
             'set' => $this->input->post('set'),
             'duration' => $this->input->post('duration'), 
             'rest' => $this->input->post('rest'), 
+            'link' => $this->input->post('link'), 
+            'start' => $this->input->post('start'), 
+            'end' => $this->input->post('end'), 
         );
         $this->Image_post($files['image'], $data, 'listsubmuscle');
         
@@ -153,6 +148,7 @@ function __construct() {
             'total' => $this->input->post('total'), 
             'duration' => $this->input->post('duration'), 
             'rounds' => $this->input->post('rounds'), 
+            'link' => $this->input->post('link'), 
         );
         $this->Image_post($files['image'], $data, 'listworkout');
     }
@@ -165,7 +161,10 @@ function __construct() {
             'name' => $this->input->post('workout'), 
             'set' => $this->input->post('set'), 
             'duration' => $this->input->post('duration'), 
-            'rest' => $this->input->post('rest'), 
+            'rest' => $this->input->post('rest'),
+            'link' => $this->input->post('link'), 
+            'start' => $this->input->post('start'), 
+            'end' => $this->input->post('end'), 
         );
         $this->Image_post($files['image'], $data, 'listsubworkout');
     }

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Nov 11, 2020 at 02:10 PM
+-- Generation Time: Nov 13, 2020 at 11:09 PM
 -- Server version: 10.4.11-MariaDB
 -- PHP Version: 7.4.3
 
@@ -89,7 +89,8 @@ CREATE TABLE `listsubmuscle` (
 --
 
 INSERT INTO `listsubmuscle` (`idDetailMuscle`, `idMuscle`, `name`, `image`, `set`, `duration`, `rest`, `link`, `start`, `end`) VALUES
-(1, 1, 'hoolla', '', 2, 3, 4, 'https://www.youtube.com/watch?v=DgGSjLE-hb8&list=RDDgGSjLE-hb8&start_radio=1&ab_channel=aestheticmelody', 10, 20);
+(1, 1, 'hoolla', '', 2, 3, 4, 'https://www.youtube.com/watch?v=DgGSjLE-hb8&list=RDDgGSjLE-hb8&start_radio=1&ab_channel=aestheticmelody', 10, 20),
+(2, 1, 'bismillah', 'http://res.cloudinary.com/gofit2/image/upload/v1605281165/hmdhn2uyzqnruvm4cmlh.png', 1, 2, 3, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -118,7 +119,8 @@ INSERT INTO `listsubworkout` (`idWorkoutDetail`, `idWorkout`, `name`, `image`, `
 (1, 1, 'gopal', '/asset/au/popo.png', 2, 3, 10, '', 0, 0),
 (2, 2, 'dosa', '/asset/su/popo.png', 3, 4, 10, '', 0, 0),
 (3, 1, 'nada', '/asset/au/popo.png', 4, 5, 2, '', 0, 0),
-(4, 2, 'yori', '/asset/su/opo.png', 5, 4, 5, '', 0, 0);
+(4, 2, 'yori', '/asset/su/opo.png', 5, 4, 5, '', 0, 0),
+(5, 2, 'bismillah', 'http://res.cloudinary.com/gofit2/image/upload/v1605280926/snyhmi3sthko4uhgmm62.png', 1, 2, 3, '', 0, 0);
 
 -- --------------------------------------------------------
 
@@ -146,7 +148,9 @@ INSERT INTO `listworkout` (`idWorkout`, `image`, `name`, `type`, `total`, `durat
 (2, '/asset/asu/pop.png', 'plias', 'tsa', 230000, 21, 2, ''),
 (3, 'http://res.cloudinary.com/gofit2/image/upload/v1604919828/txhtjpeud4zg3wlsjkzy.jpg', 'bismillah', '1', 2, 3, 4, ''),
 (4, '', 'bismillah', '1', 2, 3, 4, ''),
-(5, 'http://res.cloudinary.com/gofit2/image/upload/v1604920189/pq8uxlamoguas3spq8vd.jpg', 'bismillah', '12', 23, 32, 41, '');
+(5, 'http://res.cloudinary.com/gofit2/image/upload/v1604920189/pq8uxlamoguas3spq8vd.jpg', 'bismillah', '12', 23, 32, 41, ''),
+(6, 'http://res.cloudinary.com/gofit2/image/upload/v1605280706/rljvseyxdgmfkt27riiv.png', 'bismillah', 'alhamdulillah', 1, 2, 3, ''),
+(7, 'http://res.cloudinary.com/gofit2/image/upload/v1605280788/ycvd9codgk8oeu6nhvzm.png', 'alhamdulillah', 'bismillah', 1, 2, 3, '');
 
 -- --------------------------------------------------------
 
@@ -179,6 +183,7 @@ CREATE TABLE `muscle` (
   `muscle` varchar(30) NOT NULL,
   `duration` int(11) NOT NULL,
   `tool` varchar(50) NOT NULL,
+  `image` text NOT NULL,
   `video` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -186,8 +191,8 @@ CREATE TABLE `muscle` (
 -- Dumping data for table `muscle`
 --
 
-INSERT INTO `muscle` (`idMuscle`, `muscle`, `duration`, `tool`, `video`) VALUES
-(1, 'halo', 1, 'loha', 'https://www.youtube.com/watch?v=DgGSjLE-hb8&list=RDDgGSjLE-hb8&start_radio=1&ab_channel=aestheticmelody');
+INSERT INTO `muscle` (`idMuscle`, `muscle`, `duration`, `tool`, `image`, `video`) VALUES
+(1, 'halo', 1, 'loha', '', 'https://www.youtube.com/watch?v=DgGSjLE-hb8&list=RDDgGSjLE-hb8&start_radio=1&ab_channel=aestheticmelody');
 
 -- --------------------------------------------------------
 
@@ -202,6 +207,9 @@ CREATE TABLE `user` (
   `name` varchar(50) NOT NULL,
   `date` date NOT NULL,
   `gender` varchar(10) NOT NULL,
+  `tinggi` int(11) NOT NULL,
+  `berat` int(11) NOT NULL,
+  `umur` int(11) NOT NULL,
   `level` int(5) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -209,10 +217,10 @@ CREATE TABLE `user` (
 -- Dumping data for table `user`
 --
 
-INSERT INTO `user` (`idUser`, `username`, `password`, `name`, `date`, `gender`, `level`) VALUES
-(1, 'admin', 'admin', 'admin', '2020-09-09', 'man', 1),
-(2, 'farras', 'farras', 'farras', '2020-09-09', 'man', 0),
-(3, 'faros', 'faros', 'farraso', '2020-09-09', 'woman', 0);
+INSERT INTO `user` (`idUser`, `username`, `password`, `name`, `date`, `gender`, `tinggi`, `berat`, `umur`, `level`) VALUES
+(1, 'admin', 'admin', 'admin', '2020-09-09', 'man', 0, 0, 0, 1),
+(2, 'farras', 'farras', 'farras', '2020-09-09', 'man', 0, 0, 0, 0),
+(3, 'faros', 'faros', 'farraso', '2020-09-09', 'woman', 0, 0, 0, 0);
 
 --
 -- Indexes for dumped tables
@@ -290,19 +298,19 @@ ALTER TABLE `ingridients`
 -- AUTO_INCREMENT for table `listsubmuscle`
 --
 ALTER TABLE `listsubmuscle`
-  MODIFY `idDetailMuscle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `idDetailMuscle` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `listsubworkout`
 --
 ALTER TABLE `listsubworkout`
-  MODIFY `idWorkoutDetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `idWorkoutDetail` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
 
 --
 -- AUTO_INCREMENT for table `listworkout`
 --
 ALTER TABLE `listworkout`
-  MODIFY `idWorkout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `idWorkout` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `methods`

@@ -12,7 +12,7 @@ require APPPATH . 'libraries/REST_Controller.php';
 
         public function login_post(){
             $usr = $this->post('username');
-            $pass = $this->post('username');
+            $pass = $this->post('password');
             $user = $this->user->getUser($usr, $pass);
            
 
@@ -36,7 +36,10 @@ require APPPATH . 'libraries/REST_Controller.php';
                 'username' => $this->post('username'),
                 'password' => $this->post('password'),
                 'date' => $this->post('date'),
-                'gender' => $this->post('gender')
+                'gender' => $this->post('gender'),
+                'tinggi' => $this->post('tinggi'),
+                'berat' => $this->post('berat'),
+                'umur' => $this->post('umur')
             ];
             if ($this->user->register($data) > 0) {
                 $this->response([

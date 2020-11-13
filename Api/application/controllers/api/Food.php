@@ -69,20 +69,63 @@ class Food extends REST_Controller {
         }
     }
 
-    public function index_post()
+    public function food_post()
     {
         $files['image'] = \Cloudinary\Uploader::upload($this->input->post('image'));
         $data = array(
             'name' => $this->input->post('food'), 
+            'portion' => $this->input->post('portion'), 
+            'time' => $this->input->post('time'), 
+            'calories' => $this->input->post('calories'), 
         );
-        $this->Image_post($files['image'], $data, 'listsubmuscle');
+        $this->Image_post($files['image'], $data, 'food');
         
     }
 
-    public function Image_post($img, $data)
+    public function ingridient_post()
+    {
+        $data = array(
+            'idFood' => $this->input->post('id'), 
+            'ingridients' => $this->input->post('ingri')
+        );
+        if ($this->ls->postFood('ingridients',$data) > 0) {
+            $this->response([
+                'status' => "true", 
+                'data' => $data
+            ], 200);
+        } else {
+            $this->response([
+                'status' => "false", 
+                'massage' => 'data not found'
+            ], 404);
+        }
+        
+    }
+
+    public function metod_post()
+    {
+        $data = array(
+            'idFood' => $this->input->post('id'), 
+            'methods' => $this->input->post('method')
+        );
+        if ($this->ls->postFood('methods',$data) > 0) {
+            $this->response([
+                'status' => "true", 
+                'data' => $data
+            ], 200);
+        } else {
+            $this->response([
+                'status' => "false", 
+                'massage' => 'data not found'
+            ], 404);
+        }
+        
+    }
+
+    public function Image_post($img, $data, $t)
     {
         $data['image'] = $img['url'];  
-        if ($this->ls->postFood($data) > 0) {
+        if ($this->ls->postFood($t,$data) > 0) {
             $this->response([
                 'status' => "true", 
                 'data' => $data
