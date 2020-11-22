@@ -9,7 +9,7 @@ Widget imageHeaderDetailFood(
   double width,
   double height,
   String image,
-  int id,
+  String id,
   data,
 ) {
   return Container(
@@ -27,7 +27,7 @@ Widget imageHeaderDetailFood(
                 ? Alignment.center
                 : Alignment.topCenter,
             children: [
-              Image.asset(
+              Image.network(
                 image,
                 fit: BoxFit.cover,
                 width: Utils.filterExtentionImage(image) ? width * 0.65 : width,
@@ -71,15 +71,6 @@ Widget imageHeaderDetailFood(
                               fontSize: height * 0.026,
                               fontFamily: "ROB",
                               fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: height * 0.005),
-                          Text(
-                            "${data['desc']}",
-                            style: TextStyle(
-                              color: Colors.white,
-                              fontSize: height * 0.02,
-                              fontFamily: "ROB",
                             ),
                           ),
                         ],
@@ -175,7 +166,7 @@ Widget iconProcedure(double width, double height, IconData icon, String text) {
   );
 }
 
-Widget ingridients(double width, double height, data) {
+Widget ingridients(double width, double height, List data) {
   return Padding(
     padding:
         EdgeInsets.symmetric(horizontal: width * 0.05, vertical: height * 0.01),
@@ -203,10 +194,10 @@ Widget ingridients(double width, double height, data) {
           padding: EdgeInsets.only(top: 10),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: data['ingridients'].length,
+          itemCount: data.length,
           itemBuilder: (context, i) {
             return iconProcedure(
-                width, height, FontAwesome.plus_circle, data['ingridients'][i]);
+                width, height, FontAwesome.plus_circle, data[i]['ingridients']);
           },
         )
       ],
@@ -214,7 +205,7 @@ Widget ingridients(double width, double height, data) {
   );
 }
 
-Widget methods(double width, double height, data) {
+Widget methods(double width, double height,List data) {
   return Padding(
     padding:
         EdgeInsets.symmetric(horizontal: width * 0.05, vertical: height * 0.03),
@@ -242,10 +233,10 @@ Widget methods(double width, double height, data) {
           padding: EdgeInsets.only(top: 10),
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: data['methods'].length,
+          itemCount: data.length,
           itemBuilder: (context, i) {
             return iconProcedure(
-                width, height, FontAwesome.plus_circle, data['methods'][i]);
+                width, height, FontAwesome.plus_circle, data[i]['methods']);
           },
         )
       ],

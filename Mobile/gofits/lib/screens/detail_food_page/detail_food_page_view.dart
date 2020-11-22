@@ -16,9 +16,9 @@ class DetailFoodPageView extends DetailFoodPageViewModel {
           child: Column(
             children: [
               imageHeaderDetailFood(
-                  context, width, height, widget.image, widget.idFood, data),
-              ingridients(width, height, data),
-              methods(width, height, data),
+                  context, width, height, widget.image, widget.idFood, dataFood),
+              ingridients(width, height, ingridientsList),
+              methods(width, height, methodList),
             ],
           ),
         ),

@@ -3,7 +3,7 @@ import './detail_food_page_view.dart';
 
 class DetailFoodPage extends StatefulWidget {
 
-  final int idFood;
+  final String idFood;
   final String image;
 
   const DetailFoodPage({Key key, this.idFood, this.image}) : super(key: key);

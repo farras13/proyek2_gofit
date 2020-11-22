@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gofits/helpers/global_variable.dart';
 import 'package:gofits/screens/body_calories_page/body_calories_page.dart';
-import 'package:gofits/screens/edit_profile_page/edit_profile_page.dart';
 import 'package:gofits/screens/food_calories_page/food_calories_page.dart';
 import 'package:gofits/widgets/route_animation.dart';
 
@@ -25,49 +25,25 @@ Widget imageSection(double width, String dataImage) {
           color: bgColor,
         ),
       ),
-      Container(
-        width: width * 0.46,
-        height: width * 0.46,
-        decoration: BoxDecoration(
-          shape: BoxShape.circle,
-          image: DecorationImage(
-            image: AssetImage(
-              dataImage,
-            ),
-            fit: BoxFit.cover,
-          ),
-        ),
-      ),
+      Icon(
+        FontAwesome.user_circle,
+        size: width * 0.46,
+        color: Colors.white,
+      )
     ],
   );
 }
 
-Widget dataSectionProfile(double width) {
+Widget dataSectionProfile(double width, String name) {
   return Container(
-    child: Column(
-      crossAxisAlignment: CrossAxisAlignment.center,
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        Text(
-          "Pak Ndul",
-          style: TextStyle(
-            fontSize: width * 0.065,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: "ROBB",
-          ),
-        ),
-        SizedBox(height: 10),
-        Text(
-          "MALANG, EAST JAVA, INDONESIA",
-          style: TextStyle(
-            fontSize: width * 0.035,
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-            fontFamily: "ROBB",
-          ),
-        ),
-      ],
+    child: Text(
+      name,
+      style: TextStyle(
+        fontSize: width * 0.065,
+        color: Colors.white,
+        fontWeight: FontWeight.bold,
+        fontFamily: "ROBB",
+      ),
     ),
   );
 }
@@ -79,7 +55,6 @@ Widget serviceSectionProfile(BuildContext context, double width) {
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
         btnServiceProfile(context, "Body Calories", page: BodyCaloriesPage()),
-        btnServiceProfile(context, "Edit Profile", page: EditProfilePage()),
         btnServiceProfile(context, "Food Calories", page: FoodCaloriesPage()),
       ],
     ),
@@ -116,15 +91,21 @@ Widget btnServiceProfile(BuildContext context, String title, {page}) {
   );
 }
 
-Widget infoProfile(double width) {
+Widget infoProfile(
+  double width,
+  String gender,
+  String height,
+  String weight,
+  String age,
+) {
   return Container(
     child: Row(
       mainAxisAlignment: MainAxisAlignment.spaceEvenly,
       children: [
-        infoBox(width, "Gender", "Male"),
-        infoBox(width, "Height", "160 cm"),
-        infoBox(width, "Weight", "55 kg"),
-        infoBox(width, "Age", "20"),
+        infoBox(width, "Gender", gender),
+        infoBox(width, "Height", "$height cm"),
+        infoBox(width, "Weight", "$weight kg"),
+        infoBox(width, "Age", age),
       ],
     ),
   );

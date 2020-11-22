@@ -4,6 +4,7 @@ import 'package:gofits/helpers/global_variable.dart';
 import 'package:gofits/screens/detail_food_page/detail_food_page.dart';
 import 'package:gofits/widgets/all_widget.dart';
 import 'package:gofits/widgets/route_animation.dart';
+import 'package:gofits/widgets/shimmer/food_shimmer.dart';
 
 import './food_page_view_model.dart';
 
@@ -37,55 +38,57 @@ class FoodPageView extends FoodPageViewModel {
               children: [
                 SizedBox(height: 12),
                 titleApp(width),
-                StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.fromLTRB(
-                    mainContainerX,
-                    10,
-                    mainContainerX,
-                    mainContainerY,
-                  ),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 16,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: listFood.length,
-                  staggeredTileBuilder: (i) {
-                    var main = 0;
-                    var cross = 0;
-                    if (i % 1 == 0) {
-                      main = 1;
-                      cross = 1;
-                    }
-                    if (i % 2 == 0) {
-                      main = 1;
-                      cross = 1;
-                    }
-                    if (i % 3 == 0) {
-                      main = 1;
-                      cross = 1;
-                    }
-                    if (i % 4 == 0) {
-                      main = 1;
-                      cross = 1;
-                    }
-                    if (i % 5 == 0) {
-                      main = 1;
-                      cross = 2;
-                    }
+                listFood == null
+                    ? FoodShimmer()
+                    : StaggeredGridView.countBuilder(
+                        padding: EdgeInsets.fromLTRB(
+                          mainContainerX,
+                          10,
+                          mainContainerX,
+                          mainContainerY,
+                        ),
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 16,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: listFood.length,
+                        staggeredTileBuilder: (i) {
+                          var main = 0;
+                          var cross = 0;
+                          if (i % 1 == 0) {
+                            main = 1;
+                            cross = 1;
+                          }
+                          if (i % 2 == 0) {
+                            main = 1;
+                            cross = 1;
+                          }
+                          if (i % 3 == 0) {
+                            main = 1;
+                            cross = 1;
+                          }
+                          if (i % 4 == 0) {
+                            main = 1;
+                            cross = 1;
+                          }
+                          if (i % 5 == 0) {
+                            main = 1;
+                            cross = 2;
+                          }
 
-                    return StaggeredTile.count(cross, main);
-                  },
-                  itemBuilder: (context, i) {
-                    return itemFood(
-                      width,
-                      height,
-                      listFood[i]['idFood'],
-                      listFood[i]['image'],
-                      listFood[i]['name'],
-                    );
-                  },
-                ),
+                          return StaggeredTile.count(cross, main);
+                        },
+                        itemBuilder: (context, i) {
+                          return itemFood(
+                            width,
+                            height,
+                            listFood[i]['idFood'],
+                            listFood[i]['image'],
+                            listFood[i]['name'],
+                          );
+                        },
+                      ),
               ],
             ),
           ],
@@ -95,7 +98,7 @@ class FoodPageView extends FoodPageViewModel {
   }
 
   Widget itemFood(
-      double width, double height, int id, String image, String name) {
+      double width, double height, String id, String image, String name) {
     return Container(
       width: width,
       decoration: BoxDecoration(
@@ -125,7 +128,7 @@ class FoodPageView extends FoodPageViewModel {
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
+                child: Image.network(
                   image,
                   width: width,
                   fit: BoxFit.cover,

@@ -2,7 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:flutter_staggered_grid_view/flutter_staggered_grid_view.dart';
 import 'package:gofits/helpers/global_variable.dart';
+import 'package:gofits/screens/detail_muscle_page/detail_muscle_page.dart';
 import 'package:gofits/widgets/all_widget.dart';
+import 'package:gofits/widgets/route_animation.dart';
+import 'package:gofits/widgets/shimmer/muscle_shimmer.dart';
 import './muscle_page_view_model.dart';
 
 class MusclePageView extends MusclePageViewModel {
@@ -35,41 +38,44 @@ class MusclePageView extends MusclePageViewModel {
               children: [
                 SizedBox(height: 12),
                 titleApp(width),
-                StaggeredGridView.countBuilder(
-                  padding: EdgeInsets.fromLTRB(
-                    mainContainerX,
-                    10,
-                    mainContainerX,
-                    mainContainerY,
-                  ),
-                  crossAxisCount: 2,
-                  crossAxisSpacing: 20,
-                  mainAxisSpacing: 16,
-                  shrinkWrap: true,
-                  physics: NeverScrollableScrollPhysics(),
-                  itemCount: muscleList.length,
-                  staggeredTileBuilder: (i) {
-                    var main = 0;
-                    var cross = 0;
-                    if (i % 1 == 0) {
-                      main = 1;
-                      cross = 1;
-                    }
-                    if (i % 2 == 0) {
-                      main = 1;
-                      cross = 1;
-                    }
-                    if (i % 3 == 0) {
-                      main = 2;
-                      cross = 2;
-                    }
+                muscleList == null
+                    ? MuscleShimmer()
+                    : StaggeredGridView.countBuilder(
+                        padding: EdgeInsets.fromLTRB(
+                          mainContainerX,
+                          10,
+                          mainContainerX,
+                          mainContainerY,
+                        ),
+                        crossAxisCount: 2,
+                        crossAxisSpacing: 20,
+                        mainAxisSpacing: 16,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        itemCount: muscleList.length,
+                        staggeredTileBuilder: (i) {
+                          var main = 0;
+                          var cross = 0;
+                          if (i % 1 == 0) {
+                            main = 1;
+                            cross = 1;
+                          }
+                          if (i % 2 == 0) {
+                            main = 1;
+                            cross = 1;
+                          }
+                          if (i % 3 == 0) {
+                            main = 2;
+                            cross = 2;
+                          }
 
-                    return StaggeredTile.count(cross, main);
-                  },
-                  itemBuilder: (context, i) {
-                    return itemGridMuscle(width, height, muscleList[i], i);
-                  },
-                ),
+                          return StaggeredTile.count(cross, main);
+                        },
+                        itemBuilder: (context, i) {
+                          return itemGridMuscle(
+                              width, height, muscleList[i], i);
+                        },
+                      ),
               ],
             ),
           ],
@@ -97,12 +103,21 @@ class MusclePageView extends MusclePageViewModel {
         borderRadius: BorderRadius.circular(8),
         child: MaterialButton(
           padding: EdgeInsets.zero,
-          onPressed: () {},
+          onPressed: () {
+            nextPage(
+                context,
+                DetailMusclePage(
+                  dataId: data['idMuscle'],
+                  dataName: data['muscle'],
+                  dataImage: data['image'],
+                  video: data['video'],
+                ));
+          },
           child: Stack(
             children: [
               ClipRRect(
                 borderRadius: BorderRadius.circular(8),
-                child: Image.asset(
+                child: Image.network(
                   data['image'],
                   width: width,
                   height: height,
@@ -139,7 +154,7 @@ class MusclePageView extends MusclePageViewModel {
                             children: [
                               Container(
                                 child: Text(
-                                  data['name'],
+                                  data['muscle'],
                                   style: TextStyle(
                                     fontSize: height * 0.02,
                                     color: Colors.white,
@@ -174,7 +189,7 @@ class MusclePageView extends MusclePageViewModel {
                             crossAxisAlignment: CrossAxisAlignment.end,
                             children: [
                               Text(
-                                "${data['type']}",
+                                "${data['tool']}",
                                 style: TextStyle(
                                   fontSize: height * 0.018,
                                   fontFamily: "ROB",
@@ -214,7 +229,7 @@ class MusclePageView extends MusclePageViewModel {
                         height: height * 0.027,
                         alignment: Alignment.center,
                         child: Text(
-                          data['name'],
+                          data['muscle'],
                           style: TextStyle(
                             fontSize: height * 0.013,
                             color: Colors.white,

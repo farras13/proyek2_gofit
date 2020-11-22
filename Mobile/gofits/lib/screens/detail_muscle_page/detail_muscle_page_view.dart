@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:gofits/helpers/global_variable.dart';
-import 'package:gofits/screens/detail_workout_page/widget/detail_workout_widget.dart';
+import 'package:gofits/screens/detail_muscle_page/widget/detail_muscle_widget.dart';
 import 'package:gofits/widgets/shimmer/detail_sport_shimmer.dart';
-import './detail_workout_page_view_model.dart';
+import './detail_muscle_page_view_model.dart';
 
-class DetailWorkoutPageView extends DetailWorkoutPageViewModel {
+class DetailMusclePageView extends DetailMusclePageViewModel {
   @override
   Widget build(BuildContext context) {
     double width = MediaQuery.of(context).size.width;
@@ -12,7 +12,7 @@ class DetailWorkoutPageView extends DetailWorkoutPageViewModel {
     return SafeArea(
       child: Scaffold(
           backgroundColor: bgColor,
-          body: workoutList == null
+          body: muscleList == null
               ? DeetailSportShimmer()
               : NotificationListener<ScrollUpdateNotification>(
                   child: CustomScrollView(
@@ -23,22 +23,21 @@ class DetailWorkoutPageView extends DetailWorkoutPageViewModel {
                         backgroundColor: Colors.transparent,
                         expandedHeight: height * 0.3,
                         pinned: true,
-                        flexibleSpace: imageDetailWorkoutHeader(
-                          context,
-                          width,
-                          height,
-                          isScrolled,
-                          widget.dataId,
-                          widget.dataImage,
-                          widget.dataName,
-                          widget.dataVideo
-                        ),
+                        flexibleSpace: imageDetailMuscleHeader(
+                            context,
+                            width,
+                            height,
+                            isScrolled,
+                            widget.dataId,
+                            widget.dataImage,
+                            widget.dataName,
+                            widget.video),
                       ),
                       SliverList(
                         delegate: SliverChildListDelegate(
-                          workoutList
+                          muscleList
                               .map(
-                                (data) => detailWorkoutItem(
+                                (data) => detailMuscleItem(
                                   context,
                                   width,
                                   height,

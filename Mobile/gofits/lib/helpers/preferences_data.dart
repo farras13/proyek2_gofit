@@ -6,6 +6,21 @@ class PreferencesData {
     sp.setString("isLoggedIn", "login");
   }
 
+  Future setDataUser(
+    String name,
+    String gender,
+    String height,
+    String weight,
+    String age,
+  ) async {
+    final SharedPreferences sp = await SharedPreferences.getInstance();
+    sp.setString("name", name);
+    sp.setString("gender", gender);
+    sp.setString("height", height);
+    sp.setString("weight", weight);
+    sp.setString("age", age);
+  }
+
   Future setDataFood(String foodName, String foodImage) async {
     final SharedPreferences sp = await SharedPreferences.getInstance();
     sp.setString("foodName", foodName);

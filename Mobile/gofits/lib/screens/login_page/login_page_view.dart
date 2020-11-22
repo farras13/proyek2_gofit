@@ -70,7 +70,7 @@ class LoginPageView extends LoginPageViewModel {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Email",
+                  "Username",
                   style: TextStyle(
                     fontSize: 12,
                     fontWeight: FontWeight.bold,
@@ -92,10 +92,10 @@ class LoginPageView extends LoginPageViewModel {
                     ),
                     scrollPadding: EdgeInsets.only(bottom: 15),
                     keyboardType: TextInputType.emailAddress,
-                    controller: emailController,
+                    controller: usernameController,
                     decoration: InputDecoration(
                       border: InputBorder.none,
-                      hintText: "Enter your email",
+                      hintText: "Enter your username",
                       hintStyle: TextStyle(
                         color: inputColor,
                         fontSize: 15,

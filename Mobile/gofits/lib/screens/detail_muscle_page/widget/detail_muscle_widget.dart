@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gofits/helpers/global_variable.dart';
+import 'package:gofits/screens/detail_workout_page/widget/detail_workout_widget.dart';
 import 'package:gofits/widgets/player_youtube.dart';
-import 'package:gofits/widgets/route_animation.dart';
 
-Widget imageDetailWorkoutHeader(
+Widget imageDetailMuscleHeader(
   BuildContext context,
   double width,
   double height,
@@ -76,8 +76,8 @@ Widget imageDetailWorkoutHeader(
               child: MaterialButton(
                 padding: EdgeInsets.only(bottom: height * 0.12),
                 splashColor: Colors.transparent,
-                hoverColor: Colors.transparent,
                 highlightColor: Colors.transparent,
+                hoverColor: Colors.transparent,
                 onPressed: () {
                   showDialog(
                     context: context,
@@ -101,57 +101,7 @@ Widget imageDetailWorkoutHeader(
   );
 }
 
-Widget btnBack(BuildContext context, double width) {
-  return GestureDetector(
-    child: Icon(
-      Icons.keyboard_backspace,
-      size: width * 0.06,
-      color: Colors.white,
-    ),
-    onTap: () {
-      backScreen(context);
-    },
-  );
-}
-
-Widget workOutName(double width, String name) {
-  return Text(
-    name,
-    style: TextStyle(
-      fontSize: width * 0.045,
-      fontWeight: FontWeight.bold,
-      color: Colors.white,
-    ),
-  );
-}
-
-Widget verticalDivider(double height) {
-  return Container(
-    width: 3,
-    height: height * 0.07,
-    color: Colors.white,
-  );
-}
-
-Widget dataWorkout(double width, double height, String value, String title) {
-  return Column(
-    children: [
-      Text(
-        value,
-        style: TextStyle(
-            fontSize: height * 0.029, color: Colors.white, fontFamily: "ROBB"),
-      ),
-      SizedBox(height: 4),
-      Text(
-        title,
-        style: TextStyle(
-            fontSize: width * 0.03, color: Colors.white, fontFamily: "ROBB"),
-      ),
-    ],
-  );
-}
-
-Widget detailWorkoutItem(
+Widget detailMuscleItem(
     BuildContext context, double width, double height, data) {
   return Container(
     margin:

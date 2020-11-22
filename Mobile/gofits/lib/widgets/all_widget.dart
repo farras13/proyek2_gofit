@@ -31,6 +31,21 @@ Widget titleApp(double width) {
   );
 }
 
+void customDialog(
+  BuildContext context,
+  Widget content,
+) {
+  showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          content: content,
+          backgroundColor: headerColor,
+          titlePadding: EdgeInsets.zero,
+        );
+      });
+}
+
 toastMessage(String message,
     {Color bg = secondaryColor, Color textColor = Colors.white}) {
   return Fluttertoast.showToast(

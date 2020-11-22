@@ -34,6 +34,8 @@ dependencies:
   redux: ^4.0.0+3
   redux_logging: ^0.4.0
   shared_preferences: ^0.5.10
+  shimmer: ^1.1.2
+  youtube_player_flutter: ^7.0.0+7
 
 dev_dependencies:
   flutter_test:

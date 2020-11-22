@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_icons/flutter_icons.dart';
 import 'package:gofits/helpers/global_variable.dart';
 import 'package:gofits/screens/register_page/widgets/register_widget.dart';
-import 'package:gofits/widgets/route_animation.dart';
 import './register_page_view_model.dart';
 
 class RegisterPageView extends RegisterPageViewModel {
@@ -47,7 +46,7 @@ class RegisterPageView extends RegisterPageViewModel {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             Text(
-              "Name",
+              "Username",
               style: TextStyle(
                 fontSize: 13,
                 fontWeight: FontWeight.bold,
@@ -73,43 +72,7 @@ class RegisterPageView extends RegisterPageViewModel {
                 controller: nameController,
                 decoration: InputDecoration(
                   border: InputBorder.none,
-                  hintText: "Enter your name",
-                  hintStyle: TextStyle(
-                    color: inputColor,
-                    fontSize: 15,
-                  ),
-                ),
-              ),
-            ),
-            SizedBox(height: 16),
-            Text(
-              "Email",
-              style: TextStyle(
-                fontSize: 13,
-                fontWeight: FontWeight.bold,
-                color: mainColor,
-              ),
-            ),
-            Container(
-              width: width,
-              height: 48,
-              decoration: BoxDecoration(
-                border: Border(
-                  bottom: BorderSide(
-                    color: mainColor,
-                  ),
-                ),
-              ),
-              child: TextField(
-                style: TextStyle(
-                  color: inputColor,
-                  fontSize: 15,
-                ),
-                keyboardType: TextInputType.emailAddress,
-                controller: emailController,
-                decoration: InputDecoration(
-                  border: InputBorder.none,
-                  hintText: "Enter your email",
+                  hintText: "Enter your username",
                   hintStyle: TextStyle(
                     color: inputColor,
                     fontSize: 15,
@@ -176,6 +139,42 @@ class RegisterPageView extends RegisterPageViewModel {
             ),
             SizedBox(height: 12),
             toggleButtonGender(width),
+            SizedBox(height: 12),
+            Text(
+              "Age",
+              style: TextStyle(
+                fontSize: 13,
+                fontWeight: FontWeight.bold,
+                color: mainColor,
+              ),
+            ),
+            Container(
+              width: width,
+              height: 48,
+              decoration: BoxDecoration(
+                border: Border(
+                  bottom: BorderSide(
+                    color: mainColor,
+                  ),
+                ),
+              ),
+              child: TextField(
+                style: TextStyle(
+                  color: inputColor,
+                  fontSize: 15,
+                ),
+                keyboardType: TextInputType.number,
+                controller: ageController,
+                decoration: InputDecoration(
+                  border: InputBorder.none,
+                  hintText: "Enter your Age",
+                  hintStyle: TextStyle(
+                    color: inputColor,
+                    fontSize: 15,
+                  ),
+                ),
+              ),
+            ),
             SizedBox(height: 12),
             Text(
               "Heigth",
@@ -292,7 +291,7 @@ class RegisterPageView extends RegisterPageViewModel {
               ),
             ),
             onPressed: () {
-              backScreen(context);
+              registerAction();
             },
           ),
         ),

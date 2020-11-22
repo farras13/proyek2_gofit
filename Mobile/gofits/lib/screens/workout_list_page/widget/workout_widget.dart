@@ -22,16 +22,14 @@ Widget itemWorkoutCard(
               dataId: data['idWorkout'],
               dataName: data['name'],
               dataImage: data['image'],
-              totalExercise: data['total'],
-              duration: data['duration'],
-              round: data['rounds'],
+              dataVideo: data['link'],
             )),
         child: Stack(
           alignment: Alignment.bottomCenter,
           children: [
             ClipRRect(
               borderRadius: BorderRadius.circular(15),
-              child: Image.asset(
+              child: Image.network(
                 data['image'],
                 fit: BoxFit.cover,
                 width: width,
@@ -129,9 +127,7 @@ Widget itemWorkoutCard(
                                 dataId: data['idWorkout'],
                                 dataName: data['name'],
                                 dataImage: data['image'],
-                                totalExercise: data['total'],
-                                duration: data['duration'],
-                                round: data['rounds'],
+                                dataVideo: data['link'],
                               )),
                           child: Center(
                             child: Text(

@@ -58,7 +58,7 @@ abstract class FoodCaloriesPageViewModel extends State<FoodCaloriesPage> {
       setState(() {
         isLoading = true;
       });
-      FoodServices.getFoodCalories(qtyController.text, ingridients)
+      FoodCaloriesServices.getFoodCalories(qtyController.text, ingridients)
           .then((value) {
         var jsonObject = value.data;
         var rawData = jsonObject['totalNutrientsKCal'];
